@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détection de Visages - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Détection de Visages</h1>
+            <p>Chargez une image pour détecter automatiquement les visages présents.</p>
+        </header>
+
+        <main>
+            <!-- Formulaire d'envoi -->
+            <section class="upload-section">
+                <form id="uploadForm">
+                    <input type="file" id="imageInput" accept="image/*" required>
+                    <button type="submit" id="submitBtn">Analyser l'image</button>
+                </form>
+            </section>
+
+            <!-- Zone de chargement -->
+            <div id="loading" class="hidden">
+                <p>Traitement en cours avec OpenCV...</p>
+            </div>
+
+            <!-- Résultats -->
+            <section id="resultSection" class="result-section hidden">
+                <div class="counter-card">
+                    <h2>Visages détectés : <span id="facesCount">0</span></h2>
+                </div>
+                <div class="image-container">
+                    <img id="resultImage" src="" alt="Résultat de la détection">
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
