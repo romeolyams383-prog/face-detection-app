@@ -3,37 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détection de Visages - Portfolio</title>
+    <title>VisionAI - Détection de Visages</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Détection de Visages</h1>
-            <p>Chargez une image pour détecter automatiquement les visages présents.</p>
+    <div class="app-layout">
+        <!-- Header / Navbar -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon">👁️</div>
+                <div>
+                    <h1>VisionAI</h1>
+                    <p class="subtitle">Détection & Analyse Faciale par Vision Numérique</p>
+                </div>
+            </div>
         </header>
 
-        <main>
-            <!-- Formulaire d'envoi -->
-            <section class="upload-section">
+        <!-- Main Content -->
+        <main class="app-container">
+            <!-- Zone d'Upload -->
+            <section class="card upload-card">
+                <h2>1. Importer une image</h2>
                 <form id="uploadForm">
-                    <input type="file" id="imageInput" accept="image/*" required>
-                    <button type="submit" id="submitBtn">Analyser l'image</button>
+                    <div class="drop-zone" id="dropZone">
+                        <input type="file" id="imageInput" accept="image/*" class="file-input" required>
+                        <div class="drop-zone-content" id="dropZoneContent">
+                            <div class="upload-icon">📁</div>
+                            <p class="primary-text">Glissez-déposez une image ici</p>
+                            <p class="secondary-text">ou <span>parcourez vos fichiers</span> (PNG, JPG, JPEG)</p>
+                        </div>
+                        <div class="preview-container hidden" id="previewContainer">
+                            <img id="uploadPreview" src="" alt="Prévisualisation">
+                            <button type="button" id="removeFileBtn" class="btn-icon" title="Supprimer l'image">✕</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" id="submitBtn" class="btn btn-primary" disabled>
+                            <span class="btn-text">Lancer l'analyse OpenCV</span>
+                            <div class="spinner hidden" id="btnSpinner"></div>
+                        </button>
+                    </div>
                 </form>
             </section>
 
-            <!-- Zone de chargement -->
-            <div id="loading" class="hidden">
-                <p>Traitement en cours avec OpenCV...</p>
-            </div>
-
-            <!-- Résultats -->
-            <section id="resultSection" class="result-section hidden">
-                <div class="counter-card">
-                    <h2>Visages détectés : <span id="facesCount">0</span></h2>
+            <!-- Dashboard de Résultats -->
+            <section class="results-dashboard hidden" id="resultsDashboard">
+                <!-- KPIs / Métriques -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <span class="kpi-label">Visages Détectés</span>
+                        <span class="kpi-value" id="facesCount">0</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">Statut de l'Analyse</span>
+                        <span class="kpi-value status-success" id="analysisStatus">Terminé</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">Modèle Utilisé</span>
+                        <span class="kpi-value">Haar Cascade</span>
+                    </div>
                 </div>
-                <div class="image-container">
-                    <img id="resultImage" src="" alt="Résultat de la détection">
+
+                <!-- Comparison Grid -->
+                <div class="card comparison-card">
+                    <h2>2. Résultat du traitement</h2>
+                    <div class="image-grid">
+                        <div class="image-box">
+                            <h3>Image Annotée</h3>
+                            <div class="img-wrapper">
+                                <img id="resultImage" src="" alt="Résultat OpenCV">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
